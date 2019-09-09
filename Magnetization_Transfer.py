@@ -15,8 +15,6 @@ import pydicom as dicom
 from natsort import natsorted
 get_ipython().run_line_magic('matplotlib', 'inline')
 
-import nipype.interfaces.mrtrix3 as mrt
-
 # load MRI measurements scan list csv file
 csv_path = "ScanList file path"
 csv_file = 'ScanList_MT.csv'
@@ -28,48 +26,48 @@ T1_meas_nr = (Siemens_meas['T1']).astype(int)
 MT_meas_nr = (Siemens_meas['MT']).astype(int)
 PD_meas_nr = (Siemens_meas['PD']).astype(int)
 # subject measurement number (mac_0)
-mac_nr = (Siemens_meas['MR_Number']).astype(int)
+mes_nr = (Siemens_meas['MR_Number']).astype(int)
 
-for mac in mac_nr.index:
-    if os.path.exists("/mnt/scanner/siemens/subject/sub_0"+str(mac_nr[mac])+"/dicom"):
-        acq_path = "/mnt/scanner/siemens/subject/sub_0"+str(mac_nr[mac])+"/dicom"
+for sub in mes_nr.index:
+    if os.path.exists("/mnt/scanner/siemens/subject/sub_0"+str(mes_nr[sub])+"/dicom"):
+        acq_path = "/mnt/scanner/siemens/subject/sub_0"+str(mes_nr[sub])+"/dicom"
 
         if os.path.exists(acq_path):
             # Study folder path for each subject
             data_path = os.path.join(csv_path+"MT/")
             
-            T1_dicom_nr = 'M-0'+str(mac_nr[mac])+'-00'+str(T1_meas_nr[mac])+'-0'
-            MT_dicom_nr = 'M-0'+str(mac_nr[mac])+'-00'+str(MT_meas_nr[mac])+'-0'
-            PD_dicom_nr = 'M-0'+str(mac_nr[mac])+'-00'+str(PD_meas_nr[mac])+'-0'
+            T1_dicom_nr = 'M-0'+str(mes_nr[sub])+'-00'+str(T1_meas_nr[sub])+'-0'
+            MT_dicom_nr = 'M-0'+str(mes_nr[sub])+'-00'+str(MT_meas_nr[sub])+'-0'
+            PD_dicom_nr = 'M-0'+str(mes_nr[sub])+'-00'+str(PD_meas_nr[sub])+'-0'
             
             # check the existence of empty subject directory in the study folder
-            if not os.path.exists(data_path+"sub_0"+str(mac_nr[mac])):
+            if not os.path.exists(data_path+"sub_0"+str(mes_nr[sub])):
                 # make empty directory 
-                os.mkdir(os.path.join(data_path+"sub_0"+str(mac_nr[mac])))
+                os.mkdir(os.path.join(data_path+"sub_0"+str(mes_nr[sub])))
                 
             # check the existence of empty T1 directory in the study folder
-            if not os.path.exists(data_path+"sub_0"+str(mac_nr[mac])+"/T1"):
+            if not os.path.exists(data_path+"sub_0"+str(mes_nr[sub])+"/T1"):
                 # make empty directory 
-                os.mkdir(os.path.join(data_path+"sub_0"+str(mac_nr[mac])+"/T1"))
+                os.mkdir(os.path.join(data_path+"sub_0"+str(mes_nr[sub])+"/T1"))
             
             # Create separate folder for differenct slice packages
-            T1_save_path = os.path.join(data_path+"sub_0"+str(mac_nr[mac])+"/T1")
+            T1_save_path = os.path.join(data_path+"sub_0"+str(mes_nr[sub])+"/T1")
             
              # check the existence of empty MT directory in the study folder
-            if not os.path.exists(data_path+"sub_0"+str(mac_nr[mac])+"/MT"):
+            if not os.path.exists(data_path+"sub_0"+str(mes_nr[sub])+"/MT"):
                 # make empty directory 
-                os.mkdir(os.path.join(data_path+"sub_0"+str(mac_nr[mac])+"/MT"))
+                os.mkdir(os.path.join(data_path+"sub_0"+str(mes_nr[sub])+"/MT"))
             
             # Create separate folder for differenct slice packages
-            MT_save_path = os.path.join(data_path+"sub_0"+str(mac_nr[mac])+"/MT")
+            MT_save_path = os.path.join(data_path+"sub_0"+str(mes_nr[sub])+"/MT")
             
             # check the existence of empty PD directory in the study folder
-            if not os.path.exists(data_path+"mac_0"+str(mac_nr[mac])+"/PD"):
+            if not os.path.exists(data_path+"sub_0"+str(mes_nr[sub])+"/PD"):
                 # make empty directory 
-                os.mkdir(os.path.join(data_path+"sub_0"+str(mac_nr[mac])+"/PD"))
+                os.mkdir(os.path.join(data_path+"sub_0"+str(mes_nr[sub])+"/PD"))
             
             # Create separate folder for differenct slice packages
-            PD_save_path = os.path.join(data_path+"sub_0"+str(mac_nr[mac])+"/PD")
+            PD_save_path = os.path.join(data_path+"sub_0"+str(mes_nr[sub])+"/PD")
             
             # copy T1 dicom files into save path folder
             get_ipython().system('cp $acq_path/$T1_dicom_nr* $T1_save_path/')
