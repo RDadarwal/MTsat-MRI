@@ -1,3 +1,3 @@
-# Magnetization Transfer Saturation Imaging
+# __Magnetization Transfer saturation (MTsat) Imaging__
 
-Python script for processing of magnetization transfer saturation MRI data. 
+This jupyter notebook showcase an example of Magnetization Transfer saturation (MTsat) MRI data processing with Python. 
