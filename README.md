@@ -2,7 +2,7 @@
 
 __MTsat MRI data analysis scripts:__ \
 __MATLAB:__"MT_saturation_Imaging_MATLAB.m" \
-__Python:__ "MT_saturation_Imaging.ipybb"\
+__Python:__ "MT_saturation_Imaging.ipybb"
 
 __MT saturation (MTsat)__ parameter estimation and model fitting is based on the method described by Helms et al. 2008 (https://onlinelibrary.wiley.com/doi/full/10.1002/mrm.21732).\
 
