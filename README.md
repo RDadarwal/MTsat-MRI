@@ -1,4 +1,4 @@
-# __Magnetization Transfer saturation (MTsat) Imaging__
+# __Magnetization Transfer saturation (MTsat) MRI__
 
 "MT_saturation_Imaging_MATLAB.m" displays an example of __Magnetization Transfer saturation (MT sat) Imaging__ data analysis using __MATLAB__. Whereas, MT sat imaging data analysis using __Python__ is exhibited in "MT_saturation_Imaging.ipybb" Jupyter notebook. 
 
